@@ -4,6 +4,7 @@
     state: present
 
 - name: Create SonarQube DB
+  become: yes
   become_user: postgres
   postgresql_db:
     name: sonarqube
