@@ -6,7 +6,7 @@ with open("inventory.json") as f:
 
 inventory = {
     "all": {
-        "children": ["jenkins", "nexus", "sonarqube"]
+        "children": ["jenkins", "nexus", "sonarqube", "server"]
     },
     "jenkins": {
         "hosts": [data["jenkins_ip"]],
@@ -44,10 +44,10 @@ inventory = {
             }
 
             for ip in [
-                data["jenkins_ip"]["value"],
-                data["sonarqube_ip"]["value"],
-                data["nexus_ip"]["value"],
-                data["server_ip"]["value"]
+                data["jenkins_ip"],
+                data["sonarqube_ip"],
+                data["nexus_ip"],
+                data["server_ip"]
             ]
         }
     }    
