@@ -5,10 +5,9 @@
 
 - name: Create SonarQube DB
   become: yes
-  become_user: postgres
-  become_method: sudo
   postgresql_db:
     name: sonarqube
+    login_user: postgres
 
 - name: Create SonarQube user
   become_user: postgres
