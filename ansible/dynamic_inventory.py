@@ -36,20 +36,6 @@ inventory = {
             "ansible_ssh_private_key_file": "../../terraform-key.pem"
         }
     },
-    "_meta": {
-        "hostvars": {
-            ip: {
-                "ansible_user": "ubuntu",
-                "ansible_ssh_private_key_file": "../../terraform-key.pem"
-            }
-
-            for ip in [
-                data["jenkins_ip"],
-                data["sonarqube_ip"],
-                data["nexus_ip"],
-                data["server_ip"]
-            ]
-        }
-    }    
+    "_meta": {}    
 }
 print(json.dumps(inventory, indent=2))
