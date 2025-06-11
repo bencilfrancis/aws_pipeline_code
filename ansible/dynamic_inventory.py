@@ -21,7 +21,8 @@ inventory = {
         "vars": {
             "ansible_user": "ubuntu",
             "ansible_ssh_private_key_file": "../../terraform-key.pem",
-            "ansible_ssh_common_args": "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+            "ansible_ssh_common_args": "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null",
+            "ansible_become_flags": "-n -S"
         }
     },
     "nexus": {
