@@ -3,6 +3,24 @@
     name: [postgresql, postgresql-contrib]
     state: present
 
+- name: Install psycopg2 dependencies
+  become: yes
+  apt:
+    name:
+      - python3-pip
+      - python3-dev
+      - libpq-dev
+      - build-essential
+    state: present
+    update_cache: yes
+
+- name: Install psycopg2 Python package
+  become: yes
+  pip:
+    name: psycopg2-binary
+    executable: pip3
+
+
 - name: Create SonarQube DB
   become: yes
   postgresql_db:
