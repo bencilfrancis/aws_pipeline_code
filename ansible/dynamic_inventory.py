@@ -9,28 +9,28 @@ inventory = {
         "children": ["jenkins", "nexus", "sonarqube"]
     },
     "jenkins": {
-        "hosts": [data["jenkins_ip"]["value"]],
+        "hosts": [data["jenkins_ip"]],
         "vars": {
             "ansible_user": "ubuntu",
             "ansible_ssh_private_key_file": "../../terraform-key.pem"
         }
     },
     "sonarqube": {
-        "hosts": [data["sonarqube_ip"]["value"]],
+        "hosts": [data["sonarqube_ip"]],
         "vars": {
             "ansible_user": "ubuntu",
             "ansible_ssh_private_key_file": "../../terraform-key.pem"
         }
     },
     "nexus": {
-        "hosts": [data["nexus_ip"]["value"]],
+        "hosts": [data["nexus_ip"]],
         "vars": {
             "ansible_user": "ubuntu",
             "ansible_ssh_private_key_file": "../../terraform-key.pem"
         }
     },
     "server": {
-        "hosts": [data["server_ip"]["value"]],
+        "hosts": [data["server_ip"]],
         "vars": {
             "ansible_user": "ubuntu",
             "ansible_ssh_private_key_file": "../../terraform-key.pem"
