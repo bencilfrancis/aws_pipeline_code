@@ -18,7 +18,7 @@
     - jenkins
 
 - name: Setup Nexus
-  host: nexus
+  hosts: nexus
   become: yes
   roles:
     - nexus
