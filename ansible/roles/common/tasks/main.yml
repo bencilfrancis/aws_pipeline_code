@@ -1,0 +1,5 @@
+- name: Update system and install dependencies
+  apt:
+    name: [curl, unzip, wget]
+    state: present
+    update_cache: yes

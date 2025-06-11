@@ -1,0 +1,7 @@
+# Nexus settings
+nexus_port: 8081
+nexus_user: nexus
+
+# Include Nexus Vault secrets
+vars_files:
+  - ../vault/nexus-vault.yml

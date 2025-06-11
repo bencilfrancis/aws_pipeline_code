@@ -1,0 +1,41 @@
+- name: Install PostgresSQL
+  apt:
+    name: [postgresql, postgresql-contrib]
+    state: present
+
+- name: Create SonarQube DB
+  become_user: postgres
+  postgresql_db:
+    name: sonarqube
+
+- name: Create SonarQube user
+  become_user: postgres
+  postgresql_user:
+    name: "{{ sonar_jdbc_user }}"
+    password: "{{ sonar_jdbc_password }}"
+    priv: "sonarqube:ALL"
+
+- name: Add sonar user 
+  user: 
+    name: sonar
+    system: yes
+    shell: /bin/false
+
+- name: Download SonarQube
+  get_url: 
+    url: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-25.6.0.109173.zip
+    dest: /opt/sonarqube.zip
+
+- name: Unzip and rename
+  unarchive:
+    src: /opt/sonarqube.zip
+    dest: /opt
+    remote_src: yes
+  notify: restart sonarqube
+
+- name: Template sonar.properties
+  template:
+    src: sonar.properties.j2
+    dest: /opt/sonarqube/conf/sonar.properties
+    owner: sonar 
+    group: sonar

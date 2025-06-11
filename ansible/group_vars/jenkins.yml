@@ -1,0 +1,6 @@
+# Jenkins settings
+jenkins_http_port: 8080
+
+# Include Jenkins Vault secrets
+vars_files:
+  - ../vault/jenkins-vault.yml

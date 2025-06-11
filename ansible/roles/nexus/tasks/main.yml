@@ -1,0 +1,48 @@
+- name: Add nexus user
+  user:
+    name: nexus
+    shell: /bin/false
+    system: yes
+
+- name: Download Nexus
+  get_url:
+    url: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+    dest: /opt/nexus.tar.gz
+
+- name: Extract and move
+  unarchive:
+    src: /opt/nexus.tar.gz
+    dest: /opt
+    remote_src: yes
+
+- name: Write nexus.rc
+  copy:
+    dest: /opt/nexus/bin/nexus.rc
+    content: 'run_as_user="nexus"'
+    owner: nexus
+    group: nexus
+
+- name: Create systemd unit
+  copy:
+    dest: /etc/systemd/system/nexus.service
+    content: |
+      [Unit]
+      Description=nexus service
+      After=network.target
+
+      [Service]
+      Type=forking
+      ExecStart=/opt/nexus/bin/nexus start
+      ExecStop=/opt/nexus/bin/nexus stop
+      User=nexus
+      Restart=on-abort
+
+      [Install]
+      WantedBy=multi-user.target
+  notify: restart nexus
+
+- name: Start and enable nexus
+  systemd:
+    name: nexus
+    state: started
+    enabled: yes

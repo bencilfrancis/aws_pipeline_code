@@ -1,0 +1,24 @@
+- name: Setup CI/CD tools
+  hosts: all
+  become: yes
+  roles:
+    - common
+    - java
+
+- name: Setup SonarQube
+  hosts: sonarqube
+  become: yes
+  roles:
+    - sonarqube
+
+- name: Setup Jenkins
+  hosts: jenkins
+  become: yes
+  roles:
+    - jenkins
+
+- name: Setup Nexus
+  host: nexus
+  become: yes
+  roles:
+    - nexus
